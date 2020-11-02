@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "민지연",
+      "profile_image_url": "https://www.flaticon.com/svg/static/icons/svg/3237/3237472.svg"
+    },
+    {
+      "id": 2,
+      "name": "김형욱",
+      "profile_image_url": "https://www.flaticon.com/svg/static/icons/svg/3237/3237472.svg"
+    },
+    {
+      "id": 3,
+      "name": "이예린",
+      "profile_image_url": "https://www.flaticon.com/svg/static/icons/svg/3237/3237472.svg"
+    },
+    {
+      "id": 4,
+      "name": "김한나",
+      "profile_image_url": "https://www.flaticon.com/svg/static/icons/svg/3237/3237472.svg"
+    },
+    {
+      "id": 5,
+      "name": "김수연",
+      "profile_image_url": "https://www.flaticon.com/svg/static/icons/svg/3237/3237472.svg"
+    },
+    {
+      "id": 6,
+      "name": "김보라",
+      "profile_image_url": "https://www.flaticon.com/svg/static/icons/svg/3237/3237472.svg"
+    },
+    {
+      "id": 7,
+      "name": "구현정",
+      "profile_image_url": "https://www.flaticon.com/svg/static/icons/svg/3237/3237472.svg"
+    }
+  ]
+}
