@@ -29,7 +29,7 @@ export class RecommendRequest extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.messages === "SUCCESS") {
+        if (res.message === "SUCCESS") {
           this.setState({
             userList: res.written_list
           });

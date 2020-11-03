@@ -43,7 +43,8 @@ export class RecommendList extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.messages === "SUCCESS") {
+        console.log(">>>>>>", res);
+        if (res.message === "SUCCESS") {
           this.setState({
             userList: res.written_list
           });
@@ -53,10 +54,12 @@ export class RecommendList extends Component {
 
   render() {
     const { userList } = this.state;
+    console.log("????", userList);
     return (
       <ListProfileBox>
         {userList.length > 0 &&
           userList.map((userProfile, idx) => {
+            console.log("userProfile", userProfile);
             return (
               <RecommendListBox
                 key={idx}

@@ -19,6 +19,7 @@ class RecommendListBox extends Component {
   };
 
   render() {
+    console.log(this.props.id);
     const {
       profile_image_url,
       handleDeleteItem,
