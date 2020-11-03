@@ -1,0 +1,187 @@
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { SIGNIN_API } from "../../../config";
+import styled from "styled-components";
+import theme from "../../../Styles/theme";
+
+const SignInPw = ({
+  handleModalWindow,
+  maintainModalWindow,
+  userEmail,
+  history
+}) => {
+  const [isValidPw, setIsValidPw] = useState(true);
+  const handleAlertStyle = e => {
+    const alertName = e.target.name;
+    setIsValidPw({ [alertName]: true });
+  };
+
+  const handleLogInProcess = e => {
+    e.preventDefault();
+    const password = e.target.pwChk.value;
+    console.log(password);
+    console.log(userEmail);
+    fetch(SIGNIN_API, {
+      method: "POST",
+      body: JSON.stringify({
+        email: userEmail,
+        password: password
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res.message);
+        if (res.message === "SUCCESS") {
+          history.push("/");
+        } else if (res.message === "INVALID EMAIL OR PASSWORD")
+          setIsValidPw(false);
+      });
+  };
+
+  return (
+    <ModalContent onClick={maintainModalWindow}>
+      <Header>
+        <div>비밀번호 입력</div>
+        <button className="fas fa-times" onClick={handleModalWindow}></button>
+      </Header>
+      <Form onSubmit={handleLogInProcess}>
+        <label htmlFor="email">비밀번호</label>
+        <div>
+          <Input
+            type="password"
+            name="pwChk"
+            placeholder="비밀번호"
+            isValid={isValidPw}
+            onChange={handleAlertStyle}
+          />
+          <P isValid={isValidPw}>비밀번호가 일치하지 않습니다.</P>
+          <Button color="#3366FF" type="submit">
+            로그인
+          </Button>
+          <p>비밀번호 초기화/변경</p>
+        </div>
+      </Form>
+    </ModalContent>
+  );
+};
+
+export default withRouter(SignInPw);
+
+const ModalContent = styled.div`
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  max-height: calc(100vh - 150px);
+  background-color: white;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const Header = styled.header`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 54px;
+  margin-bottom: 20px;
+
+  div {
+    position: relative;
+    font-size: 15px;
+    font-weight: 900;
+  }
+
+  button {
+    position: absolute;
+    right: 0;
+    width: 54px;
+    height: 54px;
+    background-color: transparent;
+    color: #999999;
+    font-size: 26px;
+    font-weight: 300;
+    text-align: center;
+  }
+`;
+
+const Form = styled.form`
+  padding: 0 20px;
+
+  label {
+    display: block;
+    width: 100%;
+    padding-bottom: 14px;
+    color: #767676;
+    font-size: 14px;
+  }
+
+  span {
+    display: block;
+    width: 100%;
+    margin: 3px 0;
+    color: #969696;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  div {
+    margin-bottom: 13px;
+  }
+
+  p:last-child {
+    width: 100%;
+    color: ${theme.deepBlue};
+    margin: 20px 0 40px;
+    font-size: 14px;
+    font-weight: 900;
+    text-align: center;
+  }
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 50px;
+  border: 1px solid ${props => (props.isValid ? "#e7e8e8" : "#fe415c")};
+  border-radius: 6px;
+  font-size: 15px;
+  text-indent: 10px;
+
+  &::placeholder {
+    color: #adadad;
+    font-size: 15px;
+    font-weight: 400;
+    text-indent: 10px;
+  }
+
+  &:focus {
+    border: 1px solid ${theme.mainBlue};
+    border-radius: 6px;
+    outline: none;
+  }
+`;
+
+const P = styled.p`
+  display: ${props => (props.isValid ? "none" : "block")};
+  padding: 2px 0;
+  margin-top: 6px;
+  color: #fe415c;
+  font-size: 12px;
+  text-indent: 18px;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  height: 54px;
+  margin: 30px 0 0;
+  background: ${theme.deepBlue};
+  border: 1px solid #e7e8e8;
+  border-radius: 30px;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+`;
