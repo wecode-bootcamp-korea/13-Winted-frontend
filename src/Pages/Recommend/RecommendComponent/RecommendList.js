@@ -25,7 +25,6 @@ export class RecommendList extends Component {
         contents: ""
       })
     }).then(res => res.json());
-    // .then(res => console.log(res));
     const filterArray = this.state.userList.filter(user => {
       if (user.id !== id) {
         return user;

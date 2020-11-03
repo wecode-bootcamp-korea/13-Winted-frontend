@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-// import Detail from "./DetailData";
 import DetailSlider from "../DetailPage/DetailSlider/DetailSlider";
 import MapContent from "../DetailPage/Map/MapContent";
 import { DetailPage_API } from "../../../config";
@@ -21,19 +20,20 @@ class DetailPage extends Component {
     fetch(`${DetailPage_API}/company/${this.props?.match.params.id}`, {
       method: "GET"
     })
+      .then(res => res.json())
       .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        this.setState({
-          detail: res.job_detail,
-          response_rate: res.job_detail.response_rate
-        });
+        if (res.message === "SUCCESS") {
+          this.setState({
+            detail: res.job_detail,
+            response_rate: res.job_detail.response_rate
+          });
+        }
         if (this.state.response_rate > 50) {
           this.setState({ button: true });
         }
       });
   }
+
   handleChangeColor = () => {
     if (this.state.color === "#fe415c") {
       this.setState({ color: "#dbdbdb", likes_count: 0 });
@@ -44,15 +44,16 @@ class DetailPage extends Component {
       });
     }
   };
+
   handleChangeBtn = () => {
-    console.log(this.state.response_rate, "uuuuuu");
     if (this.state.response_rate > 50) {
       this.setState({ button: true });
     }
   };
 
   render() {
-    const { detail, likes_count } = this.state;
+    const { detail } = this.state;
+
     return (
       <DetailPageBox>
         <DetailPageInner>
@@ -88,7 +89,7 @@ class DetailPage extends Component {
                 <span className="body">{detail.address}</span>
               </div>
               <div className="map">
-                <MapContent location={this.state.detail.location} />
+                <MapContent location={detail && detail.location} />
               </div>
             </div>
             <div className="section_3">
@@ -163,6 +164,8 @@ const DetailPageInner = styled.div`
   justify-content: space-between;
   width: calc(100% - 360px);
   height: 100%;
+  margin-bottom: 100px;
+
   .rigntContents {
     position: relative;
     left: 15%;

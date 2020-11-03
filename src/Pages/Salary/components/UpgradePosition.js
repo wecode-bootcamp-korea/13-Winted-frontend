@@ -25,7 +25,6 @@ const Title = styled.div`
   width: 90%;
   max-width: 1060px;
   margin: 0 auto 50px;
-
   button {
     color: #999;
     font-size: 20px;

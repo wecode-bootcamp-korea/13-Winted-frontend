@@ -29,7 +29,6 @@ class RecommendListModal extends React.Component {
       })
     }).then(res => {
       if (res.status === 200) {
-        console.log("수정완료!");
         this.props.userVisibleModalState();
       } else {
         alert("문제 발생");
