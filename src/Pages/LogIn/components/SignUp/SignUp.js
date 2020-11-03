@@ -253,7 +253,6 @@ const ModalContent = styled.div`
   border-radius: 5px;
   transform: translate(-50%, -50%);
   overflow-y: auto;
-
   &::-webkit-scrollbar {
     display: none;
   }
@@ -264,14 +263,12 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   height: 54px;
-
   h2 {
     height: 54px;
     padding: 16px 20px;
     font-size: 16px;
     text-align: center;
   }
-
   button {
     position: absolute;
     right: 0;
@@ -287,27 +284,21 @@ const Header = styled.header`
 
 const Form = styled.div`
   padding: 0 20px 20px;
-
   li:nth-child(2) {
     display: flex;
     flex-direction: column;
-
     > div {
       display: flex;
-
       select {
         width: 120px;
         margin-right: 10px;
-
         &:focus {
           border: 1px solid ${theme.mainBlue};
         }
       }
     }
-
     input {
       width: 230px;
-
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -315,41 +306,34 @@ const Form = styled.div`
       }
     }
   }
-
   li:last-of-type {
     margin-top: 25px;
-
     div {
       display: flex;
       margin: 5px 0;
       color: #939393;
-
       > label {
         display: flex;
         justify-content: space-between;
         width: 100%;
         padding: 6px 0 0;
         margin-left: 8px;
-
         span:last-child {
           font-size: 13px;
         }
       }
     }
-
     div:first-child {
       margin-bottom: 4px;
       padding-bottom: 10px;
       border-bottom: 1px solid #e1e2e3;
       color: #333;
-
       label {
         color: #000;
         font-size: 16px;
       }
     }
   }
-
   li {
     label {
       display: block;
@@ -358,7 +342,6 @@ const Form = styled.div`
       color: #767676;
       font-size: 14px;
     }
-
     select {
       width: 100%;
       height: 50px;
@@ -368,21 +351,18 @@ const Form = styled.div`
       border-radius: 5px;
       font-size: 15px;
       text-indent: 3px;
-
       &::placeholder {
         color: #adadad;
         font-size: 15px;
         font-weight: 400;
         text-indent: 3px;
       }
-
       &:focus {
         border: 1px solid ${theme.mainBlu};
         border-radius: 6px;
         outline: none;
       }
     }
-
     input[type="checkbox"] {
       width: 14px;
       height: 14px;
@@ -402,14 +382,12 @@ const Input = styled.input`
   border-radius: 5px;
   font-size: 15px;
   text-indent: 3px;
-
   &::placeholder {
     color: #adadad;
     font-size: 15px;
     font-weight: 400;
     text-indent: 3px;
   }
-
   &:focus {
     border: 1px solid ${props => theme.mainBlue};
     border-radius: 6px;
@@ -437,7 +415,6 @@ const Button = styled.button`
   color: ${props => (!props.disabled ? "#fff" : "#cacaca")};
   font-weight: 700;
   text-align: center;
-
   &:disabled {
     cursor: not-allowed;
     pointer-events: all !important;

@@ -1,19 +1,30 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
-export class MapContent extends Component {
-  constructor(props) {
-    super(props);
-    const { location } = this.props;
+class MapContent extends Component {
+  constructor() {
+    super();
 
     this.state = {
-      locationData: [],
-      markerPosition: {
-        lat: location[0],
-        lng: location[1]
-      }
+      locationData: []
+      // markerPosition: {
+      //   lat: 0,
+      //   lng: 0
+      // }
     };
   }
+
+  // componentDidMount() {
+  //   const { location } = this.props.location;
+  //   console.log(">>>>>>>>>>", location);
+  //   this.setState(location => ({
+  //     markerPosition: {
+  //       ...location,
+  //       lat: Number(location[0]),
+  //       lng: Number(location[1])
+  //     }
+  //   }));
+  // }
 
   renderMarkers = (map, maps) => {
     const { markerPosition } = this.state;
@@ -30,7 +41,10 @@ export class MapContent extends Component {
       height: "100%"
     };
 
-    const { markerPosition } = this.state;
+    const markerPosition = {
+      lat: Number(this.props.location ? this.props.location[0] : 0),
+      lng: Number(this.props.location ? this.props.location[1] : 0)
+    };
 
     return (
       <Map

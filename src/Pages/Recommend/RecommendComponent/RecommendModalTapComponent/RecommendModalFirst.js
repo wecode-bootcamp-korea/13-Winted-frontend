@@ -19,7 +19,6 @@ export class RecommendModalFirst extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         // this.setState({
         //   userList: res.written_list
         // });
