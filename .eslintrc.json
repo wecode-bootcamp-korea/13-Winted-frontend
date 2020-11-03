@@ -1,11 +1,8 @@
 {
-    "extends": ["react-app", "plugin:prettier/recommended"]
-    // "rules": {
-    //     "indent": [2, 2],
-    //     "no-unused-vars": 1,
-    //     "no-use-before-define": 1,
-    //     "no-redeclare": 1,
-    //     "no-console": 0,
-    //     "quotes": ["error", "double"]
-    // }
+  "extends": ["react-app", "plugin:prettier/recommended"],
+  
+  "rules": {
+    "indent": "off",
+    "import/no-anonymous-default-export": "off"
+ }
 }
