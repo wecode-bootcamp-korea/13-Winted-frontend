@@ -1,0 +1,89 @@
+{
+  "message": "SUCCESS",
+  "salary_list": [
+      {
+          "id": 1,
+          "salary": 2565,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 1
+      },
+      {
+          "id": 2,
+          "salary": 2847,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 2
+      },
+      {
+          "id": 3,
+          "salary": 3093,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 3
+      },
+      {
+          "id": 4,
+          "salary": 3330,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 4
+      },
+      {
+          "id": 5,
+          "salary": 3503,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 5
+      },
+      {
+          "id": 6,
+          "salary": 3753,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 6
+      },
+      {
+          "id": 7,
+          "salary": 4026,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 7
+      },
+      {
+          "id": 8,
+          "salary": 4304,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 8
+      },
+      {
+          "id": 9,
+          "salary": 4605,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 9
+      },
+      {
+          "id": 10,
+          "salary": 4840,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 10
+      },
+      {
+          "id": 11,
+          "salary": 5108,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 11
+      },
+      {
+          "id": 12,
+          "salary": 5324,
+          "main_category_id": 1,
+          "sub_category_id": 1,
+          "career_id": 12
+      }
+  ]
+}
