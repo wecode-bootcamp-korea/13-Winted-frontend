@@ -7,18 +7,24 @@ import theme from "../../../../Styles/theme";
 const SignInPw = ({
   handleModalWindow,
   maintainModalWindow,
+  handleSignInEmailWindow,
+  handleSignInPwWindow,
+  saveUserInformation,
+  isSignInPw,
   userEmail,
   history
 }) => {
+  const [password, setPasword] = useState("");
   const [isValidPw, setIsValidPw] = useState(true);
-  const handleAlertStyle = e => {
+
+  const handleInputPassword = e => {
+    const password = e.target.value;
     const alertName = e.target.name;
+    setPasword(password);
     setIsValidPw({ [alertName]: true });
   };
 
   const handleLogInProcess = e => {
-    e.preventDefault();
-    const password = e.target.pwChk.value;
     fetch(SIGNIN_API, {
       method: "POST",
       body: JSON.stringify({
@@ -31,22 +37,26 @@ const SignInPw = ({
         if (res.message === "SUCCESS") {
           return (
             localStorage.setItem("token", res.authorization),
+            localStorage.setItem("user_data", JSON.stringify(res.user_data)),
+            alert("로그인이 완료되었습니다."),
             handleModalWindow(),
-            history.push("/joblist")
+            handleSignInEmailWindow(),
+            handleSignInPwWindow(),
+            window.location.reload()
           );
         }
         if (res.message === "INVALID EMAIL OR PASSWORD")
-          return setIsValidPw(false);
+          return setIsValidPw(false), saveUserInformation("");
       });
   };
 
   return (
-    <ModalContent onClick={maintainModalWindow}>
+    <ModalContent onClick={maintainModalWindow} isSignInPw={isSignInPw}>
       <Header>
         <div>비밀번호 입력</div>
         <button className="fas fa-times" onClick={handleModalWindow}></button>
       </Header>
-      <Form onSubmit={handleLogInProcess}>
+      <Form>
         <label htmlFor="email">비밀번호</label>
         <div>
           <Input
@@ -54,10 +64,10 @@ const SignInPw = ({
             name="pwChk"
             placeholder="비밀번호"
             isValid={isValidPw}
-            onChange={handleAlertStyle}
+            onChange={handleInputPassword}
           />
           <P isValid={isValidPw}>비밀번호가 일치하지 않습니다.</P>
-          <Button type="submit">로그인</Button>
+          <Button onClick={handleLogInProcess}>로그인</Button>
           <p>비밀번호 초기화/변경</p>
         </div>
       </Form>
@@ -68,6 +78,7 @@ const SignInPw = ({
 export default withRouter(SignInPw);
 
 const ModalContent = styled.div`
+  display: ${props => (props.isSignInPw ? "block" : "none")};
   position: relative;
   top: 50%;
   left: 50%;
@@ -109,7 +120,7 @@ const Header = styled.header`
   }
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   padding: 0 20px;
 
   label {

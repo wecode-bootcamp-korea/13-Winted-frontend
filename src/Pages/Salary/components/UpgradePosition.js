@@ -11,11 +11,7 @@ const UpgradePosition = ({ jobList }) => {
       </Title>
       <List>
         {jobList.length > 0 &&
-          jobList.map(job => (
-            <li>
-              <Job job={job} key={job.id}></Job>
-            </li>
-          ))}
+          jobList.map(job => <Job job={job} key={job.id}></Job>)}
       </List>
     </section>
   );
@@ -41,11 +37,9 @@ const Title = styled.div`
 `;
 
 const List = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
   width: 90%;
   max-width: 1060px;
   margin: 0 auto;
-  li {
-    display: inline-block;
-    vertical-align: top;
-  }
 `;
