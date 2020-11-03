@@ -88,7 +88,6 @@ const ModalContent = styled.div`
   border-radius: 5px;
   transform: translate(-50%, -50%);
   overflow-y: auto;
-
   &::-webkit-scrollbar {
     display: none;
   }
@@ -100,13 +99,11 @@ const Header = styled.header`
   align-items: center;
   height: 54px;
   margin-bottom: 20px;
-
   div {
     position: relative;
     font-size: 15px;
     font-weight: 900;
   }
-
   button {
     position: absolute;
     right: 0;
@@ -122,7 +119,6 @@ const Header = styled.header`
 
 const Form = styled.div`
   padding: 0 20px;
-
   label {
     display: block;
     width: 100%;
@@ -130,7 +126,6 @@ const Form = styled.div`
     color: #767676;
     font-size: 14px;
   }
-
   span {
     display: block;
     width: 100%;
@@ -139,11 +134,9 @@ const Form = styled.div`
     font-size: 16px;
     text-align: center;
   }
-
   div {
     margin-bottom: 13px;
   }
-
   p:last-child {
     width: 100%;
     color: ${theme.deepBlue};
@@ -161,14 +154,12 @@ const Input = styled.input`
   border-radius: 6px;
   font-size: 15px;
   text-indent: 10px;
-
   &::placeholder {
     color: #adadad;
     font-size: 15px;
     font-weight: 400;
     text-indent: 10px;
   }
-
   &:focus {
     border: 1px solid ${theme.mainBlue};
     border-radius: 6px;
