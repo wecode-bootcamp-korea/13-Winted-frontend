@@ -7,7 +7,7 @@ const KakaoInit = () => {
   window.Kakao.init("5c0711e6eb10b3d538f1711ea62fbfb6");
 };
 
-const KakaoButton = ({ handleModalWindow, history }) => {
+const KakaoButton = ({ handleModalWindow, history, location }) => {
   useEffect(() => {
     KakaoInit();
   }, []);
@@ -26,7 +26,7 @@ const KakaoButton = ({ handleModalWindow, history }) => {
               localStorage.setItem("user_data", JSON.stringify(res.user_data));
               alert("로그인이 완료되었습니다");
               handleModalWindow();
-              history.push("/joblist");
+              window.location.reload();
             }
           });
       },

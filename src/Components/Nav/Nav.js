@@ -45,7 +45,7 @@ class Nav extends Component {
   logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user_data");
-    this.props.history.push("/newIntro");
+    window.location.reload();
   };
 
   render() {
@@ -84,7 +84,7 @@ class Nav extends Component {
             </li>
             <li className="logArea">
               {!profileImage ? (
-                <Login></Login>
+                <Login />
               ) : (
                 <div>
                   <img

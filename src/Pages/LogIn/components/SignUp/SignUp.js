@@ -7,6 +7,10 @@ import theme from "../../../../Styles/theme";
 const SignUp = ({
   handleModalWindow,
   maintainModalWindow,
+  handleSignInEmailWindow,
+  handleSignUpWindow,
+  saveUserInformation,
+  isSignUp,
   userEmail,
   history
 }) => {
@@ -94,8 +98,10 @@ const SignUp = ({
         .then(res => {
           if (res.message === "SUCCESS") {
             alert("회원가입이 완료되었습니다.");
+            handleSignInEmailWindow();
+            handleSignUpWindow();
             handleModalWindow();
-            history.push("/joblist");
+            window.location.reload();
           }
         });
     }
@@ -103,11 +109,12 @@ const SignUp = ({
 
   const closeSignUpWindow = e => {
     alert("회원가입을 취소하시겠습니까?");
-    history.push("/joblists");
+    handleModalWindow();
+    window.location.reload();
   };
 
   return (
-    <ModalContent onClick={maintainModalWindow}>
+    <ModalContent onClick={maintainModalWindow} isSignUp={isSignUp}>
       <Header>
         <h2>회원가입</h2>
         <button className="fas fa-times" onClick={closeSignUpWindow}></button>
@@ -224,11 +231,7 @@ const SignUp = ({
               </label>
             </div>
           </li>
-          <Button
-            type="submit"
-            disabled={btnSubmit}
-            onClick={handleSignUpProcess}
-          >
+          <Button disabled={btnSubmit} onClick={handleSignUpProcess}>
             회원가입하기
           </Button>
         </ul>
@@ -240,6 +243,7 @@ const SignUp = ({
 export default withRouter(SignUp);
 
 const ModalContent = styled.div`
+  display: ${props => (props.isSignUp ? "block" : "none")};
   position: relative;
   top: 50%;
   left: 50%;
@@ -281,7 +285,7 @@ const Header = styled.header`
   }
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   padding: 0 20px 20px;
 
   li:nth-child(2) {
@@ -394,7 +398,7 @@ const Input = styled.input`
   background-color: #fff;
   border: 1px solid
     ${props =>
-      props.isValidUser === null || props.value ? "#e1e2e3" : "#fe415c"};
+      props.isValidUser === null || props.value ? "#e7e8e8" : "#fe415c"};
   border-radius: 5px;
   font-size: 15px;
   text-indent: 3px;

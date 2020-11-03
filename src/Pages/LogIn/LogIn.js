@@ -40,30 +40,36 @@ const Login = () => {
       <LogInButton onClick={handleModalWindow}>회원가입/로그인</LogInButton>
       <Modal isModal={isModal}>
         <ModalOverlay onClick={handleModalWindow}>
-          {isModal & isSignInEmail & !isSignUp ? (
-            <SignInEmail
-              handleModalWindow={handleModalWindow}
-              maintainModalWindow={maintainModalWindow}
-              handleSignInEmailWindow={handleSignInEmailWindow}
-              handleSignInPwWindow={handleSignInPwWindow}
-              handleSignUpWindow={handleSignUpWindow}
-              saveUserInformation={saveUserInformation}
-            />
-          ) : isModal & !isSignInEmail & isSignInPw ? (
-            <SignInPw
-              handleModalWindow={handleModalWindow}
-              maintainModalWindow={maintainModalWindow}
-              handleSignInEmailWindow={handleSignInEmailWindow}
-              saveUserInformation={saveUserInformation}
-              userEmail={userEmail}
-            />
-          ) : isModal & isSignUp & !isSignInPw ? (
-            <SignUp
-              handleModalWindow={handleModalWindow}
-              maintainModalWindow={maintainModalWindow}
-              userEmail={userEmail}
-            />
-          ) : null}
+          {
+            <>
+              <SignInEmail
+                handleModalWindow={handleModalWindow}
+                maintainModalWindow={maintainModalWindow}
+                handleSignInEmailWindow={handleSignInEmailWindow}
+                handleSignInPwWindow={handleSignInPwWindow}
+                handleSignUpWindow={handleSignUpWindow}
+                saveUserInformation={saveUserInformation}
+                isSignInEmail={isSignInEmail}
+              />
+              <SignInPw
+                handleModalWindow={handleModalWindow}
+                maintainModalWindow={maintainModalWindow}
+                handleSignInEmailWindow={handleSignInEmailWindow}
+                handleSignInPwWindow={handleSignInPwWindow}
+                saveUserInformation={saveUserInformation}
+                isSignInPw={isSignInPw}
+                userEmail={userEmail}
+              />
+              <SignUp
+                handleModalWindow={handleModalWindow}
+                maintainModalWindow={maintainModalWindow}
+                handleSignInEmailWindow={handleSignInEmailWindow}
+                handleSignUpWindow={handleSignInPwWindow}
+                isSignUp={isSignUp}
+                userEmail={userEmail}
+              />
+            </>
+          }
         </ModalOverlay>
       </Modal>
     </>
@@ -75,6 +81,7 @@ export default Login;
 const LogInButton = styled.button`
   display: block;
   padding: 0 15px;
+  font-weight: 900;
 `;
 
 const Modal = styled.div`

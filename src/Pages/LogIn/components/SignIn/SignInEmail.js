@@ -8,21 +8,23 @@ import theme from "../../../../Styles/theme";
 const SignInEmail = ({
   handleModalWindow,
   maintainModalWindow,
-  saveUserInformation,
   handleSignInEmailWindow,
   handleSignInPwWindow,
   handleSignUpWindow,
+  saveUserInformation,
+  isSignInEmail,
   history
 }) => {
-  const [isValidEmali, setIsValidEmail] = useState(true);
+  const [email, setEmail] = useState("");
+  const [isValidEmali, setIsValidEmail] = useState(null);
 
-  const handleAlertStyle = e => {
+  const handleEmailInput = e => {
+    const email = e.target.value;
+    setEmail(email);
     setIsValidEmail(true);
   };
 
   const handleLogInProcess = e => {
-    e.preventDefault();
-    const email = e.target.emailChk.value;
     const regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g;
     const isValidEmail = regEmail.test(email);
     setIsValidEmail(isValidEmail);
@@ -55,7 +57,7 @@ const SignInEmail = ({
   };
 
   return (
-    <ModalContent onClick={maintainModalWindow}>
+    <ModalContent onClick={maintainModalWindow} isSignInEmail={isSignInEmail}>
       <Header>
         <div>WINTED</div>
         <button className="fas fa-times" onClick={handleModalWindow}></button>
@@ -68,21 +70,22 @@ const SignInEmail = ({
           커리어 성장과 행복을 위한 여정<br></br>지금 윈티드에서 시작하세요.
         </h4>
       </Section>
-      <Form onSubmit={handleLogInProcess}>
+      <Form>
         <label htmlFor="email">이메일</label>
         <div>
           <Input
             type="email"
             name="emailChk"
             placeholder="이메일을 입력해 주세요."
+            value={email}
             isValid={isValidEmali}
-            onChange={handleAlertStyle}
+            onChange={handleEmailInput}
           />
-          <P isValidUser={isValidEmali}>올바른 이메일 형식을 입력해주세요.</P>
+          <P isValid={isValidEmali}>올바른 이메일 형식을 입력해주세요.</P>
         </div>
         <ul>
           <li>
-            <Button color="#3366FF" type="submit">
+            <Button color="#3366FF" onClick={handleLogInProcess}>
               <i className="far fa-envelope" />
               이메일로 시작하기
             </Button>
@@ -115,6 +118,7 @@ const SignInEmail = ({
 export default withRouter(SignInEmail);
 
 const ModalContent = styled.div`
+  display: ${props => (props.isSignInEmail ? "block" : "none")};
   position: relative;
   top: 50%;
   left: 50%;
@@ -172,7 +176,7 @@ const Section = styled.section`
   }
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   padding: 0 20px;
 
   label {
@@ -200,7 +204,9 @@ const Form = styled.form`
 const Input = styled.input`
   width: 100%;
   height: 50px;
-  border: 1px solid ${props => (props.isValid ? "#e7e8e8" : "#fe415c")};
+  border: 1px solid
+    ${props =>
+      props.isValid || props.isValid === null ? "#e7e8e8" : "#fe415c"};
   border-radius: 6px;
   font-size: 15px;
   text-indent: 10px;
@@ -220,7 +226,8 @@ const Input = styled.input`
 `;
 
 const P = styled.p`
-  display: ${props => (props.isValidUser ? "none" : "block")};
+  display: ${props =>
+    props.isValid || props.isValid === null ? "none" : "block"};
   padding: 2px 0;
   margin-top: 6px;
   color: #fe415c;
