@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { USER_FILTER_API } from "../../config";
+import { USER_LIKE_API } from "../../config";
 
 const Job = ({ job, setJobLoading, history }) => {
   const {
@@ -17,13 +17,14 @@ const Job = ({ job, setJobLoading, history }) => {
   } = job;
 
   const onLike = () => {
-    fetch(USER_FILTER_API, {
+    fetch(USER_LIKE_API, {
       method: like_status ? "DELETE" : "POST",
       body: JSON.stringify({
         company_id: id
       }),
       headers: {
-        Authorization: localStorage.getItem("token")
+        Authorization:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozfQ.FCoW9gw-N4X3Xc3VS5-rKWXj7khyyM1e9OPdyXaLLeQ"
       }
     })
       .then(response => response.json())
@@ -39,9 +40,9 @@ const Job = ({ job, setJobLoading, history }) => {
   return (
     <JobBox BGI={image_url} isliked={like_status} response_rate={response_rate}>
       <header alt={name}>
-        <div onClick={onLike}>
+        <LikeBox onClick={onLike}>
           ♥ <span> {likes_count}</span>
-        </div>
+        </LikeBox>
       </header>
       <span onClick={() => goToDetail(id)}>{title}</span>
       <span>{name}</span>
@@ -52,33 +53,21 @@ const Job = ({ job, setJobLoading, history }) => {
   );
 };
 
-const JobBox = styled.div`
+const JobBox = styled.li`
+  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 250px;
-  margin-bottom: 40px;
+  margin: 0 0 30px 0;
+  padding: 10px;
   header {
     position: relative;
     border-radius: 5px;
-    width: 250px;
-    height: 180px;
+    width: 100%;
+    height: 200px;
     background-image: url(${props => props.BGI});
     background-size: cover;
     margin-bottom: 10px;
-    div {
-      border-radius: 5px;
-      background-color: rgba(0, 0, 0, 0.3);
-      color: ${props => (props.isliked ? "red" : "white")};
-      padding: 8px 10px;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      cursor: pointer;
-      span {
-        color: white;
-      }
-    }
   }
   span {
     margin-bottom: 12px;
@@ -92,6 +81,19 @@ const JobBox = styled.div`
       font-weight: 700;
       font-size: 14px;
     }
+  }
+`;
+const LikeBox = styled.div`
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: ${props => (props.isliked ? "red" : "white")};
+  padding: 8px 10px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  span {
+    color: white;
   }
 `;
 
