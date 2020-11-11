@@ -34,6 +34,7 @@ export class RecommendTap extends Component {
                 (content, index) => {
                   return (
                     <button
+                      key={index}
                       onClick={() => this.clickHandler(index)}
                       className={
                         activeMenu === index ? "clickBtn" : "unClickBtn"

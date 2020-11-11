@@ -6,6 +6,8 @@ import Joblist from "./Pages/Joblist/Joblist";
 import DetailPage from "./Pages/Login/DetailPage/DetailPage";
 import Salary from "./Pages/Salary/Salary";
 import Footer from "./Components/Footer/Footer";
+import Resumelist from "./Pages/Resumelist/Resumelist";
+import ResumeDetail from "./Pages/Resumelist/ResumeDetail";
 
 export default class Routes extends Component {
   render() {
@@ -21,6 +23,8 @@ export default class Routes extends Component {
           <Route exact path="/detail/:id" component={DetailPage} />
           <Route exact path="/salary" component={Salary} />
           <Route exact path="/recommend" component={RecommendTap} />
+          <Route exact path="/resumelist" component={Resumelist} />
+          <Route exact path="/resume/:id" component={ResumeDetail} />
         </Switch>
         <Footer />
       </Router>
