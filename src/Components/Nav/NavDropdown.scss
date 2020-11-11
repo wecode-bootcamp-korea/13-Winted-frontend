@@ -1,0 +1,52 @@
+.presentation {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    left: 0;
+    top: 50px;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    .dropDownContainer {
+      display: flex;
+      justify-self: center;
+      height: 85%;
+      background-color: #fff;
+      .category {
+        width: 100%;
+        padding: 20px 20px 0 170px;
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          width: auto;
+          display: block;
+          font-size: 17px;
+          font-weight: 500;
+          color : #333;
+          line-height: 20px;
+          padding-right: 50px;
+          button {
+            padding-left: 60px;
+          }
+          &:first-child{
+            ul{
+              width: 350px;
+              height: 250px;
+              flex-wrap: wrap;
+            }
+          }
+          ul{
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+            li {
+              color:#999999;
+              font-size: 13px;
+              line-height: 24px;
+              height: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
