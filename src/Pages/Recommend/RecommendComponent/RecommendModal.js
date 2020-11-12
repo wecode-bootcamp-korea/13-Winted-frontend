@@ -21,7 +21,7 @@ class RecommendModal extends React.Component {
     const { ID, email } = this.state;
     return (
       <ModalFirstBox>
-        <div className="modalOveray"></div>
+        <div className="modalOveray" onClick={visibleState}></div>
         <div className="modalBoard">
           <header>
             <button onClick={visibleState}>X</button>
@@ -65,6 +65,7 @@ class RecommendModal extends React.Component {
           </div>
           <div className="btnBox">
             <button
+              onClick={visibleState}
               className={
                 email.includes("@") && ID.length > 6 ? "clickBtn" : "unClick"
               }

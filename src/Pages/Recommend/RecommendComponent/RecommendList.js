@@ -19,6 +19,13 @@ export class RecommendList extends Component {
   };
 
   handleDeleteItem = id => {
+    fetch(`${API_Detail}/recommend?id=${id}`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        contents: ""
+      })
+    }).then(res => res.json());
+    // .then(res => console.log(res));
     const filterArray = this.state.userList.filter(user => {
       if (user.id !== id) {
         return user;
@@ -30,17 +37,18 @@ export class RecommendList extends Component {
   };
 
   componentDidMount() {
-    const TOKEN =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs";
+    const TOKEN = localStorage.getItem("token");
     fetch(`${API_Detail}/recommend?type=written`, {
       method: "GET",
       headers: { Authorization: TOKEN }
     })
       .then(res => res.json())
       .then(res => {
-        this.setState({
-          userList: res.written_list
-        });
+        if (res.messages === "SUCCESS") {
+          this.setState({
+            userList: res.written_list
+          });
+        }
       });
   }
 
@@ -48,20 +56,21 @@ export class RecommendList extends Component {
     const { userList } = this.state;
     return (
       <ListProfileBox>
-        {userList.map((userProfile, idx) => {
-          return (
-            <RecommendListBox
-              key={idx}
-              handleDeleteItem={this.handleDeleteItem}
-              id={userProfile.id}
-              user_name={userProfile.user_name}
-              profile_image_url={userProfile.profile_image_url}
-              category={userProfile.category}
-              contents={userProfile.contents}
-              create_time={userProfile.create_time}
-            />
-          );
-        })}
+        {userList.length > 0 &&
+          userList.map((userProfile, idx) => {
+            return (
+              <RecommendListBox
+                key={idx}
+                handleDeleteItem={this.handleDeleteItem}
+                id={userProfile.id}
+                user_name={userProfile.user_name}
+                profile_image_url={userProfile.profile_image_url}
+                category={userProfile.category}
+                contents={userProfile.contents}
+                create_time={userProfile.create_time}
+              />
+            );
+          })}
       </ListProfileBox>
     );
   }

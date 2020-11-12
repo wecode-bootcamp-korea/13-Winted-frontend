@@ -34,7 +34,7 @@ class RecommendModalTap extends React.Component {
     return (
       <>
         <ModalTapBox>
-          <div className="modalTapOveray"></div>
+          <div className="modalTapOveray" onClick={visibleState}></div>
           <div className="modalTapBoard">
             <header>
               <span>추천 요청</span>
@@ -47,7 +47,7 @@ class RecommendModalTap extends React.Component {
                     <button
                       onClick={() => this.clickModalTapHandler(index)}
                       className={
-                        this.state.activeTap === index
+                        activeTap === index
                           ? "clickModalBtn"
                           : "unClickModalBtn"
                       }
