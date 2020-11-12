@@ -1,8 +1,48 @@
 import React, { Component } from "react";
+import { API_Detail } from "../../../config";
+import RecommendListModalEdit from "./RecommendListModalComponent/RecommendListModalEdit";
+import RecommendListModalText from "./RecommendListModalComponent/RecommendListModalText";
 import "../RecommendComponent/Recommend.scss";
 import styled from "styled-components";
 
 class RecommendListModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.id,
+      contents: this.props.contents,
+      isEdit: false
+    };
+  }
+  editHandler = () => {
+    this.setState({
+      isEdit: true
+    });
+  };
+
+  contentsHandler = e => {
+    fetch(`${API_Detail}/recommend`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        id: this.state.id,
+        contents: this.state.contents
+      })
+    }).then(res => {
+      if (res.status === 200) {
+        console.log("수정완료!");
+        this.props.userVisibleModalState();
+      } else {
+        alert("문제 발생");
+      }
+    });
+  };
+
+  handleInput = e => {
+    this.setState({
+      contents: e.target.value
+    });
+  };
+
   render() {
     const {
       userVisibleModalState,
@@ -15,10 +55,18 @@ class RecommendListModal extends React.Component {
     return (
       <>
         <ModalListBox>
-          <div className="listModalOveray"></div>
+          <div
+            className="listModalOveray"
+            onClick={userVisibleModalState}
+          ></div>
           <div className="listModalBoard">
             <header>
-              <span>추천사 확인</span>
+              {this.state.isEdit ? (
+                <span>추천사 수정</span>
+              ) : (
+                <span>추천사 확인</span>
+              )}
+
               <button className="xBtn" onClick={userVisibleModalState}>
                 X
               </button>
@@ -34,14 +82,25 @@ class RecommendListModal extends React.Component {
                   </div>
                 </div>
               </div>
-              <span className="listUserContent">{contents}</span>
+              {this.state.isEdit ? (
+                <RecommendListModalEdit
+                  handleInput={this.handleInput}
+                  contents={this.state.contents}
+                />
+              ) : (
+                <RecommendListModalText contents={contents} />
+              )}
             </div>
             <div className="ListBtnBox">
-              <button>
+              <button onClick={this.deleteHandler}>
                 <span>삭제</span>
               </button>
-              <button>
-                <span>수정</span>
+              <button onClick={() => this.editHandler()}>
+                {this.state.isEdit ? (
+                  <span onClick={this.contentsHandler}>수정 완료</span>
+                ) : (
+                  <span>수정</span>
+                )}
               </button>
             </div>
           </div>
@@ -78,7 +137,7 @@ const ModalListBox = styled.section`
     justify-content: flex-start;
     bottom: 0px;
     width: 500px;
-    height: 600px;
+    height: 460px;
     background-color: white;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 6px 5px rgba(0, 0, 0, 0.23);
     border-radius: 10px;
@@ -157,12 +216,6 @@ const ModalListBox = styled.section`
         }
       }
     }
-    .listUserContent {
-      width: 500px;
-      height: 237px;
-      padding: 20px;
-      line-height: 20px;
-    }
   }
   .ListBtnBox {
     position: absolute;
@@ -194,6 +247,12 @@ const ModalListBox = styled.section`
     button:nth-child(2) {
       background-color: rgb(5, 108, 219);
       color: white;
+      .contentOnBtn {
+        content: "수정 완료";
+      }
+      .contentOffBtn {
+        content: "수정";
+      }
     }
   }
 `;

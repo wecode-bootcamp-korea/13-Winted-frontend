@@ -22,18 +22,18 @@ export class RecommendRequest extends Component {
   };
 
   componentDidMount() {
-    const TOKEN =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs";
-
+    const TOKEN = localStorage.getItem("token");
     fetch(`${API_Detail}/recommend?type=written`, {
       method: "GET",
       headers: { Authorization: TOKEN }
     })
       .then(res => res.json())
       .then(res => {
-        this.setState({
-          userList: res.written_list
-        });
+        if (res.messages === "SUCCESS") {
+          this.setState({
+            userList: res.written_list
+          });
+        }
       });
   }
 
@@ -59,19 +59,20 @@ export class RecommendRequest extends Component {
           />
         </RecommendBox>
         {open && <RecommendModalTap visibleState={this.modalTapHandler} />}
-        {userList.map(userProfile => {
-          return (
-            <RecommendUserBox
-              handleDeleteItem={this.handleDeleteItem}
-              id={userProfile.id}
-              user_name={userProfile.user_name}
-              profile_image_url={userProfile.profile_image_url}
-              category={userProfile.category}
-              contents={userProfile.contents}
-              create_time={userProfile.create_time}
-            />
-          );
-        })}
+        {userList.length > 0 &&
+          userList.map(userProfile => {
+            return (
+              <RecommendUserBox
+                handleDeleteItem={this.handleDeleteItem}
+                id={userProfile.id}
+                user_name={userProfile.user_name}
+                profile_image_url={userProfile.profile_image_url}
+                category={userProfile.category}
+                contents={userProfile.contents}
+                create_time={userProfile.create_time}
+              />
+            );
+          })}
       </UserProfileBox>
     );
   }

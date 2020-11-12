@@ -1,7 +1,6 @@
 import React, { Component } from "react";
+import { API_Detail } from "../../../../config";
 import styled from "styled-components";
-
-const API = "https://kapi.kakao.com/v1/api/talk/friends";
 
 export class RecommendModalFirst extends Component {
   constructor() {
@@ -13,14 +12,14 @@ export class RecommendModalFirst extends Component {
   }
 
   pushMessageHandler = e => {
-    const TOKEN =
-      "Bearer I-yE8CzPHmk4QjOO4js-_M-u7U3zmxWQXujsfAo9cusAAAF1tiRM_w";
-    fetch(API, {
-      method: "GET",
+    const TOKEN = localStorage.getItem("token");
+    fetch(`${API_Detail}/recommend/send-kakaotalk`, {
+      method: "POST",
       headers: { Authorization: TOKEN }
     })
       .then(res => res.json())
       .then(res => {
+        console.log(res);
         // this.setState({
         //   userList: res.written_list
         // });
@@ -48,7 +47,7 @@ export class RecommendModalFirst extends Component {
           <span>아래 링크를 복사하여 추천사를 요청해보세요.</span>
           <input
             type="text"
-            value="울라불라 불라ㅅ짱"
+            value="WINTED에서 당신을 추천합니다."
             ref={input => (this.input = input)}
           />
 
@@ -86,6 +85,9 @@ const ModalFirst = styled.section`
     button:nth-child(2) {
       margin-top: 20px;
       background-color: rgb(37, 138, 247);
+      &:hover {
+        background-color: rgb(5, 108, 219);
+      }
     }
   }
   div:nth-child(2) {

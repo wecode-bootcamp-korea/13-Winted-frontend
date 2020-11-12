@@ -49,6 +49,7 @@ class RecommendListBox extends Component {
           </button>
           {this.state.open && (
             <RecommendListModal
+              id={this.props.id}
               userVisibleModalState={this.recommendModalHandler}
               user_name={user_name}
               profile_image_url={profile_image_url}

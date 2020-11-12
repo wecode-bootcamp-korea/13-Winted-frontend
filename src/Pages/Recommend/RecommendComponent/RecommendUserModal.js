@@ -15,7 +15,10 @@ class RecommendUserModal extends React.Component {
     return (
       <>
         <ModalUserBox>
-          <div className="userModalOveray"></div>
+          <div
+            className="userModalOveray"
+            onClick={userVisibleModalState}
+          ></div>
           <div className="userModalBoard">
             <header>
               <span>추천사 확인</span>
