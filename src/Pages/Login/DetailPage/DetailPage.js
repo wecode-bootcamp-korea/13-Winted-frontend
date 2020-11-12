@@ -10,7 +10,10 @@ class DetailPage extends Component {
     super();
     this.state = {
       detail: {},
-      likes_count: 0
+      likes_count: 0,
+      color: "#dbdbdb",
+      button: false,
+      response_rate: 0
     };
   }
 
@@ -23,13 +26,33 @@ class DetailPage extends Component {
       })
       .then(res => {
         this.setState({
-          detail: res.job_detail
+          detail: res.job_detail,
+          response_rate: res.job_detail.response_rate
         });
+        if (this.state.response_rate > 50) {
+          this.setState({ button: true });
+        }
       });
   }
+  handleChangeColor = () => {
+    if (this.state.color === "#fe415c") {
+      this.setState({ color: "#dbdbdb", likes_count: 0 });
+    } else {
+      this.setState({
+        color: "#fe415c",
+        likes_count: 1
+      });
+    }
+  };
+  handleChangeBtn = () => {
+    console.log(this.state.response_rate, "uuuuuu");
+    if (this.state.response_rate > 50) {
+      this.setState({ button: true });
+    }
+  };
 
   render() {
-    const { detail } = this.state;
+    const { detail, likes_count } = this.state;
     return (
       <DetailPageBox>
         <DetailPageInner>
@@ -41,7 +64,9 @@ class DetailPage extends Component {
               <h2>{detail.title}</h2>
               <div className="contents">
                 <h6>{detail.name}</h6>
-                <button>응답률높음</button>
+                {this.state.button && (
+                  <button onChange={this.handleChangeBtn}> 응답률높음</button>
+                )}
                 <h5>{detail.city}</h5>
               </div>
               <div className="tagArea">
@@ -94,11 +119,16 @@ class DetailPage extends Component {
             </div>
             <div className="likeArea">
               <button className="likeCount">
-                <li class="fas fa-heart"></li>
-                <span>{detail.likes_count}</span>
+                <button
+                  onClick={this.handleChangeColor}
+                  style={{ color: this.state.color }}
+                  className="fas fa-heart"
+                ></button>
+                <span>{this.state.likes_count}</span>
               </button>
+
               <button className="likePeople">
-                <li class="fas fa-user-circle"></li>
+                <li className="fad fa-user-circle" alt="profileImage"></li>
               </button>
             </div>
           </div>
@@ -234,12 +264,6 @@ const DetailPageInner = styled.div`
         padding-bottom: 80px;
         width: 100%;
         height: 280px;
-
-        /* .img {
-          width: 100%;
-          height: 280px;
-          background-color: pink;
-        } */
       }
     }
     .section_3 {
@@ -329,8 +353,7 @@ const DetailPageInner = styled.div`
         border: 1px solid #e1e2d3;
         margin-right: 12px;
         padding: 0 15px;
-        li {
-          color: #dbdbdb;
+        button {
           padding-right: 10px;
           font-size: 15px;
         }
@@ -339,9 +362,9 @@ const DetailPageInner = styled.div`
         }
       }
       .likePeople {
-        li:first-child {
-          color: #dbdbdb;
+        li {
           font-size: 24px;
+          color: #dbdbdb;
         }
       }
     }
