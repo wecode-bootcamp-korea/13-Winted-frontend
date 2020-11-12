@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { API_Detail } from "../../config";
 import "./Nav.scss";
 import NavDropdown from "./NavDropdown";
+import { Link } from "react-router-dom";
 
 const DROPDOWN = [
-  { title: "이력서" },
-  { title: "추천" },
-  { title: "이벤트" },
-  { title: "매치업" }
+  { title: "이력서", link: "/resumelist" },
+  { title: "추천", link: "/recommend" },
+  { title: "이벤트", link: "/event" },
+  { title: "매치업", link: "/mathup" }
 ];
 
 export default class Nav extends Component {
@@ -15,18 +15,20 @@ export default class Nav extends Component {
     menus: [],
     activeId: false,
     isLogin: localStorage.getItem("authorization"),
-    click: false
+    click: false,
+    user_data: {}
   };
 
   componentDidMount() {
-    fetch(`${API_Detail}/company/category`)
-      .then(res => res.json())
-
-      .then(res => {
-        this.setState({
-          categoryList: res.category_list
-        });
-      });
+    const user_data = {
+      email: "snatty0219@nate.com",
+      id: 1524347716,
+      name: "김수연",
+      profile_image_url:
+        "http://k.kakaocdn.net/dn/uiA0S/btqM4zVABOM/k3wXYyPiVj9hCoCgFZYez0/img_640x640.jpg"
+    };
+    localStorage.setItem("user_data", user_data);
+    this.setState({ user_data });
   }
 
   openDropdown = activeId => {
@@ -34,24 +36,38 @@ export default class Nav extends Component {
   };
 
   handleMyPage = click => {
-    this.setState({ click });
+    const currentState = this.state.click;
+    this.setState({ click: !currentState });
   };
   logout = () => {
     localStorage.removeItem("authorization");
+    localStorage.removeItem("user_data");
     this.setState({ isLogin: false });
   };
 
   render() {
-    const { isLogin, click } = this.state;
+    const { isLogin, click, user_data } = this.state;
     return (
       <div className="Nav">
         <div className="navInner">
           <div className="log">WINTED</div>
           <ul className="menu">
-            <li onMouseOver={() => this.openDropdown(true)}>탐색</li>
-            <li onMouseOver={() => this.openDropdown(false)}>직군별 연봉</li>
+            <li onMouseOver={() => this.openDropdown(true)}>
+              <Link to="/joblist" className="Link">
+                탐색
+              </Link>
+            </li>
+            <li onMouseOver={() => this.openDropdown(false)}>
+              <Link to="/salary" className="Link">
+                직군별 연봉
+              </Link>
+            </li>
             {DROPDOWN.map(el => (
-              <li onMouseLeave={() => this.openDropdown(false)}>{el.title}</li>
+              <li>
+                <Link to={el.link} className="Link">
+                  {el.title}
+                </Link>
+              </li>
             ))}
           </ul>
           <div className="dropdown">
@@ -60,33 +76,30 @@ export default class Nav extends Component {
             )}
           </div>
           <ul className="asideMenu">
-            <li>
+            <li className="searchIcon">
               <button className="fas fa-search"></button>
             </li>
-            <li>
+            <li className="logArea">
               {!isLogin ? (
                 <button className="logButton">회원가입/로그인</button>
               ) : (
                 <img
-                  src="https://www.flaticon.com/svg/static/icons/svg/3237/3237472.svg"
-                  width="30"
-                  height="30"
+                  className="loginUserImage"
+                  src={user_data.profile_image_url}
+                  width="40"
+                  height="40"
                   alt="loginUserImg"
                   onClick={() => this.handleMyPage(true)}
                 ></img>
               )}
             </li>
-            <li>
-              <button>기업 서비스</button>
+            <li className="companyService">
+              <button className="companyServiceBtn">기업 서비스</button>
             </li>
-            <div
-              onMouseOver={() => this.handleMyPage(true)}
-              onMouseLeave={() => this.handleMyPage(false)}
-            >
+            <div className="logindropdowncontents" onClick={this.handleMyPage}>
               {click && (
                 <div className="logindropdown">
-                  <ul>
-                    <li>프로필</li>
+                  <ul className="logindropdownlist">
                     <li>제안받기 현황</li>
                     <li>지원 현황</li>
                     <li>좋아요</li>
