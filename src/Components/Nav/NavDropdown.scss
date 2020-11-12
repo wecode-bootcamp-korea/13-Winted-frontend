@@ -1,8 +1,5 @@
 .presentation {
     position: fixed;
-    display: flex;
-    justify-content: center;
-    width: 100%;
     left: 0;
     top: 50px;
     height: 100%;
@@ -18,6 +15,7 @@
         display: flex;
         flex-wrap: wrap;
         li {
+          text-decoration: none;
           width: auto;
           display: block;
           font-size: 17px;
@@ -25,8 +23,13 @@
           color : #333;
           line-height: 20px;
           padding-right: 50px;
+          .Link{
+            text-decoration: none;
+            color:#333333;
+          }
           button {
             padding-left: 60px;
+           
           }
           &:first-child{
             ul{
@@ -44,6 +47,10 @@
               font-size: 13px;
               line-height: 24px;
               height: 30px;
+              .Link{
+                text-decoration: none;
+                color:#999999;
+              }
             }
           }
         }
