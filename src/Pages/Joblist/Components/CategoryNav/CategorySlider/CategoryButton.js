@@ -1,4 +1,6 @@
 import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setUrlLoading } from "../../../../../store/actions/index";
 import styled from "styled-components";
 
 const CategoryButton = ({
@@ -8,13 +10,12 @@ const CategoryButton = ({
   parentsId,
   history,
   changeCategories,
-  setJobLoading,
-  setIsURLUpdating,
   location
 }) => {
+  const dispatch = useDispatch();
   const onCategoryClick = () => {
     changeCategories(true);
-    setIsURLUpdating(true);
+    dispatch(setUrlLoading(true));
     const pushURL = parentsId
       ? `/joblist/${parentsId}/${Id}`
       : `/joblist/${Id}`;

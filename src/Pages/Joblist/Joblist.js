@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import CategoryNav from "./Components/CategoryNav/CategoryNav";
 import styled from "styled-components";
 import JoblistMain from "./Components/JoblistMain/JoblistMain";
-import { JOB_API } from "../../config";
-import { USER_FILTER_API } from "../../config";
-import { CATEGORY_API } from "../../config";
-import { setFilter } from "../../store/actions/index";
+import { USER_FILTER_API, CATEGORY_API, JOB_API } from "../../config";
+import {
+  setFilter,
+  setJobLoading,
+  setUrlLoading
+} from "../../store/actions/index";
 
 const objToQuery = obj => {
   const str = Object.entries(obj)
@@ -20,12 +22,13 @@ const objToQuery = obj => {
 
 const Joblist = ({ history, location }) => {
   const { main, sub } = useParams();
-  const { jobData, setJobLoading } = useJobsFetch(main, sub, location);
   const [isFilterloading, setIsFilterloading] = useState(true);
-  const [isURLUpdating, setIsURLUpdating] = useState(true);
   const [sortingState, setSortingState] = useState("popularity");
   const userFilterState = useSelector(state => state.userFilterReducer);
+  const jobLoading = useSelector(state => state.jobFetchReducer);
+  const urlUpdating = useSelector(state => state.urlUpdateReducer);
   const dispatch = useDispatch();
+  const { jobData } = useJobsFetch(main, sub, location, jobLoading, dispatch);
   const {
     currentCategories,
     categoryRoute,
@@ -38,17 +41,18 @@ const Joblist = ({ history, location }) => {
         method: "GET",
         headers: {
           Authorization:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozfQ.FCoW9gw-N4X3Xc3VS5-rKWXj7khyyM1e9OPdyXaLLeQ"
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
         }
       })
         .then(res => res.json())
         .then(res => {
           delete res.message;
+          console.log(res);
           dispatch(setFilter(res));
           setIsFilterloading(false);
-          setIsURLUpdating(true);
+          dispatch(setUrlLoading(true));
         });
-    if (isURLUpdating) {
+    if (urlUpdating) {
       const QueryURL = ((sub, main) => {
         if (sub) return `/joblist/${main}/${sub}`;
         else if (main) return `/joblist/${main}`;
@@ -57,10 +61,10 @@ const Joblist = ({ history, location }) => {
       history.push(
         `${QueryURL}?${objToQuery(userFilterState)}&job_sort=${sortingState}`
       );
-      setIsURLUpdating(false);
-      setJobLoading(true);
+      dispatch(setUrlLoading(false));
+      dispatch(setJobLoading(true));
     }
-  }, [isURLUpdating]);
+  }, [urlUpdating]);
 
   return (
     <Main>
@@ -68,15 +72,8 @@ const Joblist = ({ history, location }) => {
         currentCategories={currentCategories}
         categoryRoute={categoryRoute}
         reFetch={reFetchCategory}
-        setJobLoading={setJobLoading}
-        setIsURLUpdating={setIsURLUpdating}
       />
-      <JoblistMain
-        jobData={jobData}
-        setJobLoading={setJobLoading}
-        setIsURLUpdating={setIsURLUpdating}
-        setSortingState={setSortingState}
-      />
+      <JoblistMain jobData={jobData} setSortingState={setSortingState} />
     </Main>
   );
 };
@@ -125,9 +122,8 @@ const useCategoryFetch = (main, sub) => {
   };
 };
 
-const useJobsFetch = (main, sub, location) => {
+const useJobsFetch = (main, sub, location, jobLoading, dispatch) => {
   const [jobData, setJobData] = useState();
-  const [jobLoading, setJobLoading] = useState(true);
 
   const objToQuery = () => {
     const jobCategoryQuery = main
@@ -146,17 +142,17 @@ const useJobsFetch = (main, sub, location) => {
         method: "GET",
         headers: {
           Authorization:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozfQ.FCoW9gw-N4X3Xc3VS5-rKWXj7khyyM1e9OPdyXaLLeQ"
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
         }
       })
         .then(res => res.json())
         .then(res => {
           setJobData(res.job_list);
-          setJobLoading(false);
+          dispatch(setJobLoading(false));
         });
   }, [jobLoading]);
 
-  return { jobData, setJobLoading };
+  return { jobData };
 };
 
 const Main = styled.main`

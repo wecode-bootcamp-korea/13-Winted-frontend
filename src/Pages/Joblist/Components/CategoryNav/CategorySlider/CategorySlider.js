@@ -1,13 +1,9 @@
 import { useState } from "react";
 import CategoryButton from "./CategoryButton";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-const CategorySlider = ({
-  caterories,
-  changeCategories,
-  setJobLoading,
-  setIsURLUpdating
-}) => {
+const CategorySlider = ({ caterories, changeCategories }) => {
   const totalPage = parseInt(caterories.length / 8);
   const slideInterval = (1060 - ((caterories.length * 130) % 1060)) / totalPage;
   const { page, changePage } = useArrowBtn(0, totalPage);
@@ -39,7 +35,6 @@ const CategorySlider = ({
               categoryImg={category.image_url}
               parentsId={category.category_id}
               changeCategories={changeCategories}
-              setIsURLUpdating={setIsURLUpdating}
             />
           ))}
         </ul>

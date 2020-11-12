@@ -1,20 +1,16 @@
 import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { setUrlLoading } from "../../../../../store/actions/index";
 
-const CategoryRoute = ({
-  routes,
-  changeCategories,
-  history,
-  setJobLoading,
-  setIsURLUpdating,
-  location
-}) => {
+const CategoryRoute = ({ routes, changeCategories, history, location }) => {
+  const dispatch = useDispatch();
   return (
     <Section>
       <button
         onClick={() => {
           changeCategories(true);
-          setIsURLUpdating(true);
+          dispatch(setUrlLoading(true));
           history.push(`/joblist${location.search}`);
         }}
       >
@@ -25,13 +21,7 @@ const CategoryRoute = ({
           <span> &gt; </span>
           <button
             onClick={() =>
-              updateJoblist(
-                route,
-                changeCategories,
-                history,
-                setJobLoading,
-                setIsURLUpdating
-              )
+              updateJoblist(route, changeCategories, history, dispatch)
             }
           >
             {route.title}
@@ -42,15 +32,9 @@ const CategoryRoute = ({
   );
 };
 
-const updateJoblist = (
-  route,
-  changeCategories,
-  history,
-  setJobLoading,
-  setIsURLUpdating
-) => {
+const updateJoblist = (route, changeCategories, history, dispatch) => {
   changeCategories(true);
-  setIsURLUpdating(true);
+  dispatch(setUrlLoading(true));
   const pushURL = route.category_id
     ? `/joblist/${route.category_id}/${route.id}`
     : `/joblist/${route.id}`;

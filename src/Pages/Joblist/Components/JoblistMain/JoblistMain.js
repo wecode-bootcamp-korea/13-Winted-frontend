@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import TagModal from "./TagModal";
 import LocationModal from "./LocationModal";
@@ -15,15 +15,9 @@ const filterData = [
 
 const sortData = ["최신순", "보상금순", "인기순", "응답률순"];
 
-const obj = (activeModalId, closeModal, setJobLoading, setIsURLUpdating) => {
+const obj = (activeModalId, closeModal, setIsURLUpdating) => {
   const target = {
-    1: (
-      <TagModal
-        closeModal={closeModal}
-        setJobLoading={setJobLoading}
-        setIsURLUpdating={setIsURLUpdating}
-      />
-    ),
+    1: <TagModal closeModal={closeModal} setIsURLUpdating={setIsURLUpdating} />,
     2: <LocationModal closeModal={closeModal} />,
     3: <CareerModal closeModal={closeModal} />
   };
@@ -32,7 +26,6 @@ const obj = (activeModalId, closeModal, setJobLoading, setIsURLUpdating) => {
 
 const JoblistMain = ({
   jobData,
-  setJobLoading,
   setIsURLUpdating,
   setSortingState,
   history
@@ -65,7 +58,7 @@ const JoblistMain = ({
           ))}
         </div>
         <ModalBackground data-name="modalBack" isVisible={activeModalId}>
-          {obj(activeModalId, closeModal, setJobLoading, setIsURLUpdating)}
+          {obj(activeModalId, closeModal, setIsURLUpdating)}
         </ModalBackground>
         <Select onChange={changeSortingState}>
           {sortData.map(type => (
@@ -74,17 +67,12 @@ const JoblistMain = ({
         </Select>
       </JobSortSection>
       <LikeButtonBox>
-        <button onClick={() => history.push("/profile/likes")}>
+        <button onClick={() => history.push("/favoritelist")}>
           ♥ 좋아요 모아보기 &gt;
         </button>
       </LikeButtonBox>
       <JoblistSection>
-        <ul>
-          {jobData &&
-            jobData.map(job => (
-              <Job key={job.id} job={job} setJobLoading={setJobLoading} />
-            ))}
-        </ul>
+        <ul>{jobData && jobData.map(job => <Job key={job.id} job={job} />)}</ul>
       </JoblistSection>
     </JobListMain>
   );
@@ -123,7 +111,6 @@ const JobSortSection = styled.div`
 
 const LikeButtonBox = styled.div`
   width: 1060px;
-
   button {
     font-weight: 700;
     color: #3366ff;
@@ -132,9 +119,8 @@ const LikeButtonBox = styled.div`
 
 const JoblistSection = styled.section`
   width: 1060px;
-
   ul {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

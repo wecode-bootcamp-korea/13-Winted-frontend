@@ -1,15 +1,18 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./NavDropdown.scss";
 import { API_Detail } from "../../config";
 import { Link } from "react-router-dom";
+import { setUrlLoading } from "../../store/actions/index";
 
-export default class NavDropdown extends Component {
+class NavDropdown extends Component {
   constructor() {
     super();
     this.state = {
       menus: []
     };
   }
+
   componentDidMount() {
     fetch(`${API_Detail}/company/category`)
       .then(res => {
@@ -32,15 +35,21 @@ export default class NavDropdown extends Component {
             <ul className="category" onMouseLeave={() => leaveDropdown(false)}>
               {categoryList &&
                 categoryList.map(category => (
-                  <li>
+                  <li onClick={this.props.setUrlLoading(true)}>
                     <Link to={`/joblist/${category.id}`} className="Link">
                       {category.title}
                       <button className="fal fa-angle-right"></button>
                       <ul className="subCategory">
                         {category &&
                           category?.sub_category.map(subCategory => (
-                            <li>
+                            <li
+                              onClick={() => {
+                                this.props.setUrlLoading(true);
+                                window.location.reload(true);
+                              }}
+                            >
                               <Link
+                                onclick={() => window.location.reload(true)}
                                 to={`/joblist/${category.id}/${subCategory.id}`}
                                 className="Link"
                               >
@@ -59,3 +68,11 @@ export default class NavDropdown extends Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setUrlLoading: text => dispatch(setUrlLoading(text))
+  };
+}
+
+export default connect(null, mapDispatchToProps)(NavDropdown);

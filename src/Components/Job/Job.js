@@ -1,9 +1,12 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { USER_LIKE_API } from "../../config";
+import { setJobLoading } from "../../store/actions/index";
 
-const Job = ({ job, setJobLoading, history }) => {
+const Job = ({ job, history }) => {
+  const dispatch = useDispatch();
   const {
     id,
     title,
@@ -12,24 +15,23 @@ const Job = ({ job, setJobLoading, history }) => {
     likes_count,
     image_url,
     compensation,
-    like_status,
+    likes_status,
     response_rate
   } = job;
-
   const onLike = () => {
     fetch(USER_LIKE_API, {
-      method: like_status ? "DELETE" : "POST",
-      body: JSON.stringify({
-        company_id: id
-      }),
+      method: "POST",
       headers: {
         Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozfQ.FCoW9gw-N4X3Xc3VS5-rKWXj7khyyM1e9OPdyXaLLeQ"
-      }
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
+      },
+      body: JSON.stringify({
+        company_id: id
+      })
     })
       .then(response => response.json())
       .then(result => {
-        if (result.message === "SUCCESS") setJobLoading(true);
+        dispatch(setJobLoading(true));
       });
   };
 
@@ -38,17 +40,17 @@ const Job = ({ job, setJobLoading, history }) => {
   };
 
   return (
-    <JobBox BGI={image_url} isliked={like_status} response_rate={response_rate}>
+    <JobBox BGI={image_url} response_rate={response_rate}>
       <header alt={name}>
-        <LikeBox onClick={onLike}>
+        <LikeBox onClick={onLike} isliked={likes_status}>
           ♥ <span> {likes_count}</span>
         </LikeBox>
       </header>
       <span onClick={() => goToDetail(id)}>{title}</span>
       <span>{name}</span>
       {response_rate > 85 && <ResponseRate>응답률 매우 높음</ResponseRate>}
-      <span>서울.{city}</span>
-      <span>채용보상금 {compensation} 원</span>
+      <span>한국 · {city}</span>
+      <span>채용보상금 {Number(compensation).toLocaleString()} 원</span>
     </JobBox>
   );
 };
@@ -70,30 +72,39 @@ const JobBox = styled.li`
     margin-bottom: 10px;
   }
   span {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     &:nth-child(2) {
       font-weight: 700;
       font-size: 18px;
       cursor: pointer;
-      font-size: 16px;
     }
     &:nth-child(3) {
       font-weight: 700;
-      font-size: 14px;
+      font-size: 15px;
+    }
+    &:nth-child(4) {
+      color: gray;
+      font-size: 13px;
+    }
+    &:nth-child(5) {
+      font-size: 13px;
     }
   }
 `;
+
 const LikeBox = styled.div`
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.3);
-  color: ${props => (props.isliked ? "red" : "white")};
-  padding: 8px 10px;
+  color: ${props => (props.isliked ? "red" : "rgba(255, 255, 255, 0.5)")};
+  padding: 7px 10px;
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 10px;
+  right: 10px;
+  font-size: 13px;
   cursor: pointer;
   span {
     color: white;
+    font-weight: bold;
   }
 `;
 

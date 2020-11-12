@@ -3,21 +3,19 @@ import { withRouter } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FILTER_API } from "../../../../config";
-import { addFilter } from "../../../../store/actions/index";
-import { deleteFilter } from "../../../../store/actions/index";
+import {
+  addFilter,
+  deleteFilter,
+  setUrlLoading
+} from "../../../../store/actions/index";
 
-const TagModal = ({
-  closeModal,
-  location,
-  history,
-  setJobLoading,
-  setIsURLUpdating
-}) => {
+const TagModal = ({ closeModal }) => {
   const [filteringTags, setFilteringTags] = useState([]);
   const [mainTagId, setMaintagId] = useState(1);
   const [onSave, setOnSave] = useState(true);
   const userFilterState = useSelector(state => state.userFilterReducer);
   const dispatch = useDispatch();
+  console.log(userFilterState);
 
   const setTagState = (id, name) => {
     const isHavingTag = userFilterState.tag.some(function (val) {
@@ -38,6 +36,7 @@ const TagModal = ({
         setFilteringTags(res.tag_list);
       });
   }, []);
+
   return (
     <Modal>
       <HeaderMenu>
@@ -99,17 +98,16 @@ const TagModal = ({
             />
             선택한 필터를 항상 유지합니다
           </h5>
-          <button data-name="exitModal" onClick={() => setIsURLUpdating(true)}>
+          <button
+            data-name="exitModal"
+            onClick={() => dispatch(setUrlLoading(true))}
+          >
             확인
           </button>
         </footer>
       </SelecedTagsBox>
     </Modal>
   );
-};
-
-const useCheckBox = () => {
-  return;
 };
 
 const Modal = styled.div`

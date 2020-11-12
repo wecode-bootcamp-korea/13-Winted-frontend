@@ -1,29 +1,17 @@
 import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import CategorySlider from "./CategorySlider/CategorySlider";
 import CategoryRoute from "./CategoryRoute/CategoryRoute";
 import styled from "styled-components";
 
-const CategoryNav = ({
-  currentCategories,
-  categoryRoute,
-  reFetch,
-  setJobLoading,
-  setIsURLUpdating
-}) => {
+const CategoryNav = ({ currentCategories, categoryRoute, reFetch }) => {
   return (
     <CategoryNavSection>
-      <CategoryRoute
-        routes={categoryRoute}
-        changeCategories={reFetch}
-        setJobLoading={setJobLoading}
-        setIsURLUpdating={setIsURLUpdating}
-      />
+      <CategoryRoute routes={categoryRoute} changeCategories={reFetch} />
       {currentCategories.length && (
         <CategorySlider
           caterories={currentCategories}
           changeCategories={reFetch}
-          setJobLoading={setJobLoading}
-          setIsURLUpdating={setIsURLUpdating}
         />
       )}
     </CategoryNavSection>

@@ -8,6 +8,7 @@ import Salary from "./Pages/Salary/Salary";
 import Footer from "./Components/Footer/Footer";
 import Resumelist from "./Pages/Resumelist/Resumelist";
 import ResumeDetail from "./Pages/Resumelist/ResumeDetail";
+import Favoritelist from "./Pages/Favoritelist/Favoritelist";
 
 export default class Routes extends Component {
   render() {
@@ -25,6 +26,7 @@ export default class Routes extends Component {
           <Route exact path="/recommend" component={RecommendTap} />
           <Route exact path="/resumelist" component={Resumelist} />
           <Route exact path="/resume/:id" component={ResumeDetail} />
+          <Route exact path="/favoritelist" component={Favoritelist} />
         </Switch>
         <Footer />
       </Router>
