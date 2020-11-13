@@ -1,0 +1,57 @@
+{
+    "message": "SUCCESS",
+    "resume_detail": {
+        "id": 1,
+        "title": "김형욱1",
+        "status": false,
+        "introduction": "안녕하세요 술을 사랑하는 이예린입니다.",
+        "career_list": [
+            {
+                "id": 1,
+                "company_name": "위코드",
+                "position": "사원",
+                "start_date": null,
+                "end_date": null
+            },
+            {
+                "id": 2,
+                "company_name": "세컨회사",
+                "position": "사원",
+                "start_date": null,
+                "end_date": null
+            },
+            {
+                "id": 3,
+                "company_name": "Thrid Company",
+                "position": "대표",
+                "start_date": "1985-10-01",
+                "end_date": "2001-02-01"
+            }
+        ],
+        "education_list": [
+            {
+                "id": 1,
+                "university": "서울대학교",
+                "major": "컴퓨터공학과",
+                "subject": "C#",
+                "start_date": null,
+                "end_date": null
+            }
+        ],
+        "award_list": [
+            {
+                "id": 1,
+                "activity": "새나라어린이상",
+                "detail": "아침 일찍 일어나면 받는상",
+                "date": null
+            }
+        ],
+        "language_list": [
+            {
+                "id": 1,
+                "language": "영어",
+                "level": "유창함"
+            }
+        ]
+    }
+}

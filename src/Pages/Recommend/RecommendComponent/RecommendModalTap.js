@@ -45,6 +45,7 @@ class RecommendModalTap extends React.Component {
                 {["링크", "이메일", "SMS", "원티드 친구"].map((el, index) => {
                   return (
                     <button
+                      key={index}
                       onClick={() => this.clickModalTapHandler(index)}
                       className={
                         activeTap === index
