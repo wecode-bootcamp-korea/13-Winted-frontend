@@ -5,14 +5,18 @@ import { USER_LIKE_API } from "../../config";
 
 const Favoritelist = () => {
   const [favoritelist, setFavoritelist] = useState([]);
-  useEffect(() => {
-    fetch(USER_LIKE_API, {
-      method: "GET",
-      headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
+  const option = localStorage.getItem("token")
+    ? {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
       }
-    })
+    : {
+        method: "GET"
+      };
+  useEffect(() => {
+    fetch(USER_LIKE_API, option)
       .then(res => res.json())
       .then(res => {
         setFavoritelist(res.job_list);
@@ -30,10 +34,12 @@ const Favoritelist = () => {
 };
 
 const Main = styled.main`
-  margin-top: 100px;
+  padding-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #eeeeee;
+  height: 100vh;
   ul {
     width: 1060px;
     margin-top: 20px;

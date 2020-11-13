@@ -91,8 +91,7 @@ const useResumeDetail = (onInitialize, id) => {
     fetch(`${RESUME_LIST_API}/${id}`, {
       method: "GET",
       headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
+        Authorization: localStorage.getItem("token")
       }
     })
       .then(res => res.json())

@@ -22,8 +22,7 @@ const Job = ({ job, history }) => {
     fetch(USER_LIKE_API, {
       method: "POST",
       headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
+        Authorization: localStorage.getItem("token")
       },
       body: JSON.stringify({
         company_id: id
@@ -48,7 +47,7 @@ const Job = ({ job, history }) => {
       </header>
       <span onClick={() => goToDetail(id)}>{title}</span>
       <span>{name}</span>
-      {response_rate > 85 && <ResponseRate>응답률 매우 높음</ResponseRate>}
+      {response_rate > 50 && <ResponseRate>응답률 매우 높음</ResponseRate>}
       <span>한국 · {city}</span>
       <span>채용보상금 {Number(compensation).toLocaleString()} 원</span>
     </JobBox>
@@ -89,6 +88,9 @@ const JobBox = styled.li`
     &:nth-child(5) {
       font-size: 13px;
     }
+    &:nth-child(6) {
+      font-size: 13px;
+    }
   }
 `;
 
@@ -108,11 +110,12 @@ const LikeBox = styled.div`
   }
 `;
 
-const ResponseRate = styled.span`
+const ResponseRate = styled.div`
   color: #00aead;
   border: 1px solid #00aead;
   padding: 3px;
   font-size: 10px;
+  margin-bottom: 10px;
 `;
 
 export default withRouter(Job);

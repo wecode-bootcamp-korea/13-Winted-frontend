@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./Components/Nav/Nav";
 import RecommendTap from "./Pages/Recommend/RecommendTap";
 import Joblist from "./Pages/Joblist/Joblist";
-import DetailPage from "./Pages/Login/DetailPage/DetailPage";
+import DetailPage from "./Pages/DetailPage/DetailPage";
 import Salary from "./Pages/Salary/Salary";
 import Footer from "./Components/Footer/Footer";
 import Resumelist from "./Pages/Resumelist/Resumelist";
@@ -16,8 +16,7 @@ export default class Routes extends Component {
       <Router>
         <Nav />
         <Switch>
-          <Route exact path="/" />
-          <Route exact path="/newIntro" />
+          <Route exact path="/" component={Joblist} />
           <Route exact path="/joblist" component={Joblist} />
           <Route exact path="/joblist/:main" component={Joblist} />
           <Route exact path="/joblist/:main/:sub" component={Joblist} />

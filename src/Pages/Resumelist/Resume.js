@@ -12,8 +12,7 @@ const Resume = ({ title, createTime, status, id, history, setIsLoading }) => {
     fetch(`${RESUME_LIST_API}?id=${id}`, {
       method: "DELETE",
       headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
+        Authorization: localStorage.getItem("token")
       }
     }).then(() => {
       setIsLoading(true);

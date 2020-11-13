@@ -1,4 +1,8 @@
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  tag: [],
+  city: [],
+  career: []
+};
 
 const userFilterReducer = (state = INITIAL_STATE, action) => {
   if (action.type === "SET") return action.payload;
