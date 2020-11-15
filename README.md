@@ -24,7 +24,7 @@ https://www.youtube.com/watch?v=QYjbZsKxNwA&t=25s
 + 이예린 :
 + 민지연 :
 + 김한나 :
-+ 김수연 :
++ 김수연 : [[Wecode] 2차 프로젝트 후기](https://velog.io/@link717/Wecode-2%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
 
 ## 🌃 기술 스택
 ### 👩‍👧‍👧‍👧 FrontEnd
@@ -88,9 +88,11 @@ https://www.youtube.com/watch?v=QYjbZsKxNwA&t=25s
 
 ## 🌃 프로젝트 진행과정
 1차 프로젝트와 마찬가지로 Trello를 이용해서 정보 공유 및 작업 현황을 확인했습니다.
-Backlog에 처음 기획한 기능들을
-Design에는 프로젝트에 필요한 이미지들
-To Do(This Week)에는 이번주까지 할 작업들
-Doing에는 현재 하고있는 작업들
-Testing에는 FrontEnd와 BackEnd간의 테스트 중인 부분들
-Done에는 위의 작업들을 완료했을때 작성했습니다.
+Backlog에 처음 기획한 기능들을 Design에는 프로젝트에 필요한 이미지들
+To Do(This Week)에는 이번주까지 할 작업들 Doing에는 현재 하고있는 작업들
+Testing에는 FrontEnd와 BackEnd간의 테스트 중인 부분들 Done에는 위의 작업들을 완료했을때 작성했습니다.
+
+## 🌃 Reference
+이 프로젝트는 원티드 사이트를 참조하여 학습목적으로 만들었습니다.
+실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
+이 프로젝트에서 사용하고 있는 사진 대부분은 위코드에서 구매한 것이므로 해당 프로젝트 외부인이 사용할 수 없습니다.
