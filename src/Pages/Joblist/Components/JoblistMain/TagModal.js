@@ -3,11 +3,8 @@ import { withRouter } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FILTER_API } from "../../../../config";
-import {
-  addFilter,
-  deleteFilter,
-  setUrlLoading
-} from "../../../../store/actions/index";
+import { addFilter, deleteFilter } from "../../../../store/actions/index";
+import { setUrlLoading } from "../../../../store/actions/index";
 
 const TagModal = ({ closeModal }) => {
   const [filteringTags, setFilteringTags] = useState([]);

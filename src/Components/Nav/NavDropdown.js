@@ -45,7 +45,7 @@ class NavDropdown extends Component {
                             <li
                               onClick={() => {
                                 this.props.setUrlLoading(true);
-                                window.location.reload(true);
+                                window.location.reload();
                               }}
                             >
                               <Link

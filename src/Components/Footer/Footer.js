@@ -6,7 +6,8 @@ const Footer = () => {
     <FooterWrapper>
       <div>
         <div>
-          <img src="./images/footer-logo.JPG" alt="logo" />
+          {/* <img src="./images/footer-logo.JPG" alt="logo" /> */}
+          <h4>WINTED</h4>
           <h4>이용약관</h4>
           <h4>개인정보 처리방침</h4>
           <h4>고객센터</h4>

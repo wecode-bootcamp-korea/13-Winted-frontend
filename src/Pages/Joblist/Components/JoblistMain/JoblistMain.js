@@ -6,6 +6,7 @@ import TagModal from "./TagModal";
 import LocationModal from "./LocationModal";
 import CareerModal from "./CareerModal";
 import Job from "../../../../Components/Job/Job";
+import { setUrlLoading } from "../../../../store/actions/index";
 
 const filterData = [
   { name: "태그", key: "tag" },
@@ -13,7 +14,7 @@ const filterData = [
   { name: "경력", key: "career" }
 ];
 
-const sortData = ["최신순", "보상금순", "인기순", "응답률순"];
+const sortData = ["인기순", "보상금순", "인기순", "응답률순"];
 
 const obj = (activeModalId, closeModal, setIsURLUpdating) => {
   const target = {
@@ -32,6 +33,7 @@ const JoblistMain = ({
 }) => {
   const { activateModal, closeModal, activeModalId } = useModal();
   const userFilterState = useSelector(state => state.userFilterReducer);
+  const dispatch = useDispatch();
 
   const changeSortingState = e => {
     const sortingType = ["compensation", "popularity", "response"];
@@ -39,7 +41,7 @@ const JoblistMain = ({
       target: { selectedIndex }
     } = e;
     setSortingState(sortingType[selectedIndex - 1]);
-    setIsURLUpdating(true);
+    dispatch(setUrlLoading(true));
   };
 
   return (

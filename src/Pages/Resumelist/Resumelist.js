@@ -9,8 +9,7 @@ const Resumelist = () => {
     fetch(RESUME_LIST_API, {
       method: "POST",
       headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
+        Authorization: localStorage.getItem("token")
       }
     })
       .then(res => res.json())
@@ -54,8 +53,7 @@ const useResume = () => {
       fetch(RESUME_LIST_API, {
         method: "GET",
         headers: {
-          Authorization:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
+          Authorization: localStorage.getItem("token")
         }
       })
         .then(res => res.json())

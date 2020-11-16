@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import NavDropdown from "./NavDropdown";
-import Login from "../../Pages/Login/LogIn";
+import Login from "../../Pages/LogIn/LogIn";
 import { Link, withRouter } from "react-router-dom";
 import "./Nav.scss";
 

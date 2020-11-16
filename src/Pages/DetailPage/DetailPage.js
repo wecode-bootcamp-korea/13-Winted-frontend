@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import DetailSlider from "../DetailPage/DetailSlider/DetailSlider";
 import MapContent from "../DetailPage/Map/MapContent";
-import { DetailPage_API } from "../../../config";
+import { DetailPage_API } from "../../config";
 
 class DetailPage extends Component {
   constructor() {
@@ -144,7 +144,7 @@ const DetailPageBox = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  margin-top: 50px;
+  margin-top: 100px;
 `;
 
 const ApplyButton = styled.button`
@@ -168,7 +168,7 @@ const DetailPageInner = styled.div`
 
   .rigntContents {
     position: relative;
-    left: 15%;
+    left: 26%;
     width: 640px;
     height: 100%;
     .companyImg {
@@ -281,7 +281,7 @@ const DetailPageInner = styled.div`
   }
   .asideArea {
     position: fixed;
-    right: 15%;
+    right: 21%;
     width: 340px;
     height: 340px;
     border: 1px solid #e1e2e3;

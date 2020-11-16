@@ -36,14 +36,18 @@ const Joblist = ({ history, location }) => {
   } = useCategoryFetch(main, sub);
 
   useEffect(() => {
-    if (isFilterloading)
-      fetch(USER_FILTER_API, {
-        method: "GET",
-        headers: {
-          Authorization:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
+    const option = localStorage.getItem("token")
+      ? {
+          method: "GET",
+          headers: {
+            Authorization: localStorage.getItem("token")
+          }
         }
-      })
+      : {
+          method: "GET"
+        };
+    if (isFilterloading)
+      fetch(USER_FILTER_API, option)
         .then(res => res.json())
         .then(res => {
           delete res.message;
@@ -137,19 +141,24 @@ const useJobsFetch = (main, sub, location, jobLoading, dispatch) => {
 
   useEffect(() => {
     const query = objToQuery();
-    if (jobLoading)
-      fetch(`${JOB_API}${query}`, {
-        method: "GET",
-        headers: {
-          Authorization:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.y4jC7L4ivmLmgcWVhi4zCvRuBZdExJC0ObJP8lzC_Fs"
+    const option = localStorage.getItem("token")
+      ? {
+          method: "GET",
+          headers: {
+            Authorization: localStorage.getItem("token")
+          }
         }
-      })
-        .then(res => res.json())
-        .then(res => {
-          setJobData(res.job_list);
-          dispatch(setJobLoading(false));
-        });
+      : {
+          method: "GET"
+        };
+    if (jobLoading) console.log(JOB_API, query);
+    fetch(`${JOB_API}${query}`, option)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        setJobData(res.job_list);
+        dispatch(setJobLoading(false));
+      });
   }, [jobLoading]);
 
   return { jobData };
