@@ -11,8 +11,7 @@ const SignInPw = ({
   handleSignInPwWindow,
   saveUserInformation,
   isSignInPw,
-  userEmail,
-  history
+  userEmail
 }) => {
   const [password, setPasword] = useState("");
   const [isValidPw, setIsValidPw] = useState(true);

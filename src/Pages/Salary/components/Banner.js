@@ -16,11 +16,9 @@ const Banner = () => {
           제안합니다.
         </p>
         <ul>
-          <i className="fab fa-html5" />
-          <i className="fab fa-css3" />
-          <i className="fab fa-slack" />
-          <i className="fab fa-js" />
-          <i className="fab fa-react" />
+          {ICONS.map((icon, idx) => (
+            <i className={icon} key={idx} />
+          ))}
         </ul>
         <button>시작하기</button>
       </div>
@@ -29,6 +27,14 @@ const Banner = () => {
 };
 
 export default Banner;
+
+const ICONS = [
+  "fab fa-html5",
+  "fab fa-css3",
+  "fab fa-slack",
+  "fab fa-js",
+  "fab fa-react"
+];
 
 const BannerWrapper = styled.div`
   width: 90%;
