@@ -6,17 +6,17 @@ const Footer = () => {
     <FooterWrapper>
       <div>
         <div>
-          {/* <img src="./images/footer-logo.JPG" alt="logo" /> */}
-          <h4>WINTED</h4>
-          <h4>이용약관</h4>
-          <h4>개인정보 처리방침</h4>
-          <h4>고객센터</h4>
+          <img src="./images/footer-logo.JPG" alt="logo" />
+          {MENUS.map((menu, idx) => (
+            <h4 key={idx}>{menu}</h4>
+          ))}
         </div>
-        <select name="" id="">
-          <option value="KR">한국 (한국어)</option>
-          <option value="JP">日本 (日本語)</option>
-          <option value="TW">台灣 (繁體中文)</option>
-          <option value="HK">Worldwide (English)</option>
+        <select>
+          {LANGUAGES.map((language, idx) => (
+            <option value={language.key} key={idx}>
+              {language.value}
+            </option>
+          ))}
         </select>
       </div>
       <p>
@@ -32,6 +32,14 @@ const Footer = () => {
 };
 
 export default Footer;
+
+const MENUS = ["WINTED", "이용약관", "개인정보 처리방침", "고객센터"];
+const LANGUAGES = [
+  { KR: "한국 (한국어)" },
+  { JP: "日本 (日本語)" },
+  { TW: "台灣 (繁體中文)" },
+  { HK: "Worldwide (English)" }
+];
 
 const FooterWrapper = styled.footer`
   padding: 30px 0 70px;

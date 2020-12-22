@@ -9,10 +9,8 @@ const SignUp = ({
   maintainModalWindow,
   handleSignInEmailWindow,
   handleSignUpWindow,
-  saveUserInformation,
   isSignUp,
-  userEmail,
-  history
+  userEmail
 }) => {
   const [chkBox, setChkBox] = useState([false, false]);
   const [allChkBox, setAllChkBox] = useState(false);
@@ -32,7 +30,7 @@ const SignUp = ({
     const check = chkBox.every(chk => chk);
     setAllChkBox(check);
     setIsValidUser({ ...isValidUser, allChk: check });
-  }, [chkBox]);
+  }, [...chkBox]);
 
   useEffect(() => {
     const check = chkBox.every(chk => chk);
@@ -107,7 +105,7 @@ const SignUp = ({
     }
   };
 
-  const closeSignUpWindow = e => {
+  const closeSignUpWindow = () => {
     alert("회원가입을 취소하시겠습니까?");
     handleModalWindow();
     window.location.reload();
