@@ -22,7 +22,7 @@ https://www.youtube.com/watch?v=QYjbZsKxNwA&t=25s
 + 김형욱 : [Wanted / 2차 클론 프로젝트](https://velog.io/@kho5420/Wanted-2%EC%B0%A8-%ED%81%B4%EB%A1%A0-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
 + 박재용 : 
 + 이예린 :[Wanted / 2차 클론 프로젝트](https://velog.io/@yerin719/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%81%B4%EB%A1%A0-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
-+ 민지연 :
++ 민지연 : [Wanted / 2차 프로젝트 회고](https://velog.io/@ichbinmin2/wecode-2%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
 + 김한나 :[Wanted / 2차 클론 프로젝트](https://velog.io/@nana_kim/2%EC%B0%A8-%ED%81%B4%EB%A1%A0-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8Wanted)
 + 김수연 : [[Wecode] 2차 프로젝트 후기](https://velog.io/@link717/Wecode-2%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
 
